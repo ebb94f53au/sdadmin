@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sd.mapper.ColumnConfigMapper">
+
+    <select id="findOne" resultType="com.sd.domain.ColumnConfig">
+        select * from column_config where id= #{id}
+    </select>
+    <select id="findByTableNameOrderByIdAsc" resultType="com.sd.domain.ColumnConfig">
+        select * from column_config where table_name = #{tableName} order by id asc
+    </select>
+
+    <insert id="saveAll" parameterType="java.util.List" useGeneratedKeys="true">
+        insert into column_config (table_name,column_name,column_type,key_type,extra,remark,not_null,list_show,form_show,form_type,query_type,dict_name,date_annotation)
+        values
+        <foreach collection="list" item="item" index="index" separator=",">
+            (
+            #{item.tableName},
+            #{item.columnName},
+            #{item.columnType},
+            #{item.keyType},
+            #{item.extra},
+            #{item.remark},
+            #{item.notNull},
+            #{item.listShow},
+            #{item.formShow},
+            #{item.formType},
+            #{item.queryType},
+            #{item.dictName},
+            #{item.dateAnnotation}
+            )
+        </foreach>
+
+    </insert>
+</mapper>

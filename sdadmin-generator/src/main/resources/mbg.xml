@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+
+    <context id="DB2Tables" targetRuntime="MyBatis3" defaultModelType="flat">
+<!--        添加 mapper接口 上@Mapper 的插件-->
+        <plugin type="org.mybatis.generator.plugins.MapperAnnotationPlugin" />
+        <commentGenerator>
+<!--            如果表名和系统名冲突设置这个即可-->
+            <property name="suppressAllComments" value="true"/>
+        </commentGenerator>
+        <!--        配置数据库连接信息-->
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                        connectionURL="jdbc:mysql://192.168.127.3:3306/eladmin"
+                        userId="root"
+                        password="123456">
+            <property name="nullCatalogMeansCurrent" value="true" />
+        </jdbcConnection>
+
+        <javaTypeResolver >
+            <property name="forceBigDecimals" value="false" />
+        </javaTypeResolver>
+        <!--        指定javabean生成的位置-->
+        <javaModelGenerator targetPackage="com.sd.modules.system.domain" targetProject="E:\IDEA\workspace\sdadmin\sdadmin-system\src\main\java">
+<!--            不加上数据库的路径，按照targetPackage路径来-->
+            <property name="enableSubPackages" value="false" />
+            <property name="trimStrings" value="true" />
+        </javaModelGenerator>
+        <!--        指定sql映射文件生成的位置-->
+        <sqlMapGenerator targetPackage="mapper"  targetProject="E:\IDEA\workspace\sdadmin\sdadmin-system\src\main\resources\mybatis">
+            <property name="enableSubPackages" value="false" />
+            <property name="trimStrings" value="true" />
+        </sqlMapGenerator>
+        <!--        指定dao生成的位置，mapper接口生成的位置-->
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.sd.modules.system.mapper"  targetProject="E:\IDEA\workspace\sdadmin\sdadmin-system\src\main\java">
+            <property name="enableSubPackages" value="false" />
+        </javaClientGenerator>
+        <!--          指定每个表的生成策略 catalog 为指定数据库-->
+        <table tableName="user" domainObjectName="User"/>
+
+
+    </context>
+</generatorConfiguration>

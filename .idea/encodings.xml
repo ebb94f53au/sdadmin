@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/sdadmin-common" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/sdadmin-generator" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/sdadmin-logging" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/sdadmin-monitor" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/sdadmin-system" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/sdadmin-tools" charset="UTF-8" />
+  </component>
+</project>

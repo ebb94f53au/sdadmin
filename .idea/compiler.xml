@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="sdadmin-tools" />
+        <module name="sdadmin-monitor" />
+        <module name="sdadmin-common" />
+        <module name="sdadmin-generator" />
+        <module name="sdadmin-system" />
+        <module name="sdadmin-logging" />
+      </profile>
+    </annotationProcessing>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="sdadmin" options="-parameters" />
+      <module name="sdadmin-common" options="-parameters" />
+      <module name="sdadmin-generator" options="-parameters" />
+      <module name="sdadmin-logging" options="-parameters" />
+      <module name="sdadmin-monitor" options="-parameters" />
+      <module name="sdadmin-system" options="-parameters" />
+      <module name="sdadmin-tools" options="-parameters" />
+    </option>
+  </component>
+</project>
