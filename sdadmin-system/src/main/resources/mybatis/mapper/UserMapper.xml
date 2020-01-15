@@ -338,4 +338,7 @@
   <select id="getUserByUsername" resultType="com.sd.modules.system.domain.User">
         select * from user where username = #{username}
   </select>
+  <select id="getRoleIdsByUsername" resultType="java.lang.Long">
+        select role_id from user,users_roles where user.id=users_roles.user_id and user.username = #{username}
+  </select>
 </mapper>

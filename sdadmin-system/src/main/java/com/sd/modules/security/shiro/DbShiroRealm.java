@@ -1,8 +1,11 @@
 package com.sd.modules.security.shiro;
 
 import com.sd.exception.BadRequestException;
+import com.sd.modules.security.security.vo.JwtUser;
+import com.sd.modules.security.service.JwtUserService;
 import com.sd.modules.system.domain.User;
 import com.sd.modules.system.service.UserService;
+import com.sd.modules.system.service.dto.UserDto;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
@@ -18,7 +21,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class DbShiroRealm extends AuthorizingRealm {
 
     @Autowired
-    UserService userService;
+    private UserService userService;
+    @Autowired
+    private JwtUserService jwtUserService;
 
 
     /**
@@ -53,15 +58,17 @@ public class DbShiroRealm extends AuthorizingRealm {
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
         UsernamePasswordToken usernamePasswordToken =(UsernamePasswordToken) authenticationToken;
         String username = usernamePasswordToken.getUsername();
-        User user = null;
+        UserDto userDto = null;
         try {
-            user= userService.getUserByUsername(username);
+            userDto= userService.getUserByUsername(username);
         } catch (BadRequestException e) {
             //将异常向上抛出
             throw e;
 
         }
+        //构建jwt -》VO对象
+        JwtUser jwtUser = jwtUserService.createJwtUser(userDto);
 
-        return new SimpleAuthenticationInfo(user,user.getPassword(),"dbRealm");
+        return new SimpleAuthenticationInfo(jwtUser,userDto.getPassword(),"dbRealm");
     }
 }

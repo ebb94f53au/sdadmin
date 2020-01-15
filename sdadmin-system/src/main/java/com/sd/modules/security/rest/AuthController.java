@@ -14,6 +14,7 @@ import com.sd.modules.security.service.JwtUserService;
 import com.sd.modules.security.service.OnlineUserService;
 import com.sd.modules.system.domain.User;
 import com.sd.modules.system.service.UserService;
+import com.sd.modules.system.service.dto.UserDto;
 import com.sd.utils.RedisUtils;
 import com.wf.captcha.GifCaptcha;
 import com.wf.captcha.SpecCaptcha;
@@ -56,15 +57,15 @@ public class AuthController {
     @Autowired
     private SecurityProperties properties;
     @Autowired
-    RedisUtils redisUtils;
+    private RedisUtils redisUtils;
     @Autowired
-    JwtTokenProvider jwtTokenProvider;
+    private JwtTokenProvider jwtTokenProvider;
     @Autowired
-    JwtUserService jwtUserService;
+    private JwtUserService jwtUserService;
     @Autowired
-    OnlineUserService onlineUserService;
+    private  OnlineUserService onlineUserService;
     @Autowired
-    UserService userService;
+    private UserService userService;
     @ApiOperation("登录授权")
     @PostMapping("/login")
     public ResponseEntity<Object> login(@Validated @RequestBody AuthUser authUser, HttpServletRequest request) throws BadRequestException {
@@ -92,8 +93,7 @@ public class AuthController {
         //1.生成token
         String token = jwtTokenProvider.createToken(authUser.getUsername());
         //2.保存在线信息
-        User user = (User)subject.getPrincipal();
-        JwtUser jwtUser = jwtUserService.createJwtUser(user);
+        JwtUser jwtUser = (JwtUser)subject.getPrincipal();
         onlineUserService.save(jwtUser,token,request);
 
         Map<String,Object> authInfo = new HashMap<String,Object>(2){{
@@ -112,8 +112,8 @@ public class AuthController {
     public ResponseEntity<Object> getUserInfo(HttpServletRequest request){
         String token = jwtTokenProvider.getToken(request);
         String username = jwtTokenProvider.parseToken(token);
-        User user = userService.getUserByUsername(username);
-        JwtUser jwtUser = (JwtUser)jwtUserService.createJwtUser(user);
+        UserDto user = userService.getUserByUsername(username);
+        JwtUser jwtUser = jwtUserService.createJwtUser(user);
         return ResponseEntity.ok(jwtUser);
     }
 

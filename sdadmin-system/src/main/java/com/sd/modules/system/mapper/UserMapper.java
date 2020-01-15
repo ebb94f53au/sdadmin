@@ -3,6 +3,8 @@ package com.sd.modules.system.mapper;
 import com.sd.modules.system.domain.User;
 import com.sd.modules.system.domain.UserExample;
 import java.util.List;
+import java.util.Set;
+
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -30,5 +32,17 @@ public interface UserMapper {
 
     int updateByPrimaryKey(User record);
 
+    /**
+     * 根据用户名得到用户
+     * @param username
+     * @return
+     */
     User getUserByUsername(String username);
+
+    /**
+     * 根据用户名得到所有角色Id
+     * @param username
+     * @return
+     */
+    Set<Long> getRoleIdsByUsername(String username);
 }

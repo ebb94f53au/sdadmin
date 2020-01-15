@@ -3,6 +3,7 @@ package com.sd.exception.handler;
 import com.sd.exception.BadRequestException;
 import com.sd.utils.ThrowableUtil;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.shiro.authc.AuthenticationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -21,6 +22,12 @@ public class GlobalExceptionHandler {
     public ResponseEntity incorrectCredentialsException(CredentialsException e){
         log.error("用户名或密码不正确");
         return buildResponseEntity(ApiError.error("用户名或密码不正确"));
+    }
+
+    @ExceptionHandler(value = AuthenticationException.class)
+    public ResponseEntity incorrectCredentialsException(AuthenticationException e){
+        log.error("没有账号信息");
+        return buildResponseEntity(ApiError.error("没有账号信息"));
     }
     /**
      * 处理自定义异常

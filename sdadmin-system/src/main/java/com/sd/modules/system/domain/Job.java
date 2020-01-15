@@ -1,7 +1,12 @@
 package com.sd.modules.system.domain;
 
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+
 import java.util.Date;
 
+@NoArgsConstructor
+@AllArgsConstructor
 public class Job {
     private Long id;
 

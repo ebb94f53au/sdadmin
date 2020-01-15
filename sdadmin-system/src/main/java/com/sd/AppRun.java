@@ -1,9 +1,15 @@
 package com.sd;
 
 import com.alibaba.druid.spring.boot.autoconfigure.DruidDataSourceAutoConfigure;
+import com.sd.modules.system.domain.Job;
 import com.sd.modules.system.domain.User;
 import com.sd.modules.system.mapper.RoleMapper;
 import com.sd.modules.system.mapper.UserMapper;
+import com.sd.modules.system.service.UserService;
+import com.sd.modules.system.service.converter.JobConverter;
+import com.sd.modules.system.service.dto.DeptDto;
+import com.sd.modules.system.service.dto.JobDto;
+import com.sd.modules.system.service.dto.UserDto;
 import com.sd.utils.SpringContextHolder;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +24,7 @@ import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.mvc.method.RequestMappingInfo;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -31,7 +38,8 @@ import java.util.Set;
 @SpringBootApplication
 public class AppRun {
     @Autowired
-    RoleMapper roleMapper;
+    private UserService userService;
+
 
 
     public static void main(String[] args) {
@@ -42,7 +50,8 @@ public class AppRun {
 
     @GetMapping("/")
     public String index(){
-        Set<String> permissionsByRoleId = roleMapper.getPermissionsByRoleId((long) 1);
+        UserDto admin = userService.getUserByUsername("admin");
+        System.out.println(admin);
 
         return "11";
     }

@@ -1,5 +1,6 @@
 package com.sd.modules.system.mapper;
 
+import com.sd.modules.system.domain.Menu;
 import com.sd.modules.system.domain.Role;
 import com.sd.modules.system.domain.RoleExample;
 import java.util.List;
@@ -38,4 +39,11 @@ public interface RoleMapper {
      * @return
      */
     Set<String> getPermissionsByRoleId(Long roleId);
+    /**
+     * 根据roleId获得全部菜单
+     * type不等于2，且按照sort从小到大排序
+     * @param roleId
+     * @return
+     */
+    Set<Menu> getMenusByRoleId(Long roleId);
 }

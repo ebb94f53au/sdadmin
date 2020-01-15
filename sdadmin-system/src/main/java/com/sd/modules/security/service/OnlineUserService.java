@@ -23,9 +23,9 @@ import java.util.Date;
 @Service
 public class OnlineUserService {
     @Autowired
-    SecurityProperties properties;
+    private SecurityProperties properties;
     @Autowired
-    RedisUtils redisUtils;
+    private RedisUtils redisUtils;
 
     /**
      * 将JwtUser转化为OnlineUser并保存下来

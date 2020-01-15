@@ -245,4 +245,7 @@
     select permission from menu,roles_menus where menu.id=roles_menus.menu_id and roles_menus.role_id = #{roleId}
      and menu.permission is not null and menu.permission != ""
   </select>
+  <select id="getMenusByRoleId" resultType="com.sd.modules.system.domain.Menu">
+    select menu.* from menu,roles_menus where menu.id=roles_menus.menu_id and roles_menus.role_id = #{roleId} and menu.type!=2 order by menu.sort asc
+  </select>
 </mapper>

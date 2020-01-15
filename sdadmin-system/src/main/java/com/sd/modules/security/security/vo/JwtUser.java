@@ -25,7 +25,7 @@ public class JwtUser {
 
     private final String sex;
 
-    private final Long avatar;
+    private final String avatar;
 
     private final String email;
 

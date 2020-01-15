@@ -24,22 +24,22 @@
             <property name="forceBigDecimals" value="false" />
         </javaTypeResolver>
         <!--        指定javabean生成的位置-->
-        <javaModelGenerator targetPackage="com.sd.modules.system.domain" targetProject="E:\IDEA\workspace\sdadmin\sdadmin-system\src\main\java">
+        <javaModelGenerator targetPackage="com.sd.domain" targetProject="E:\IDEA\workspace\sdadmin\sdadmin-logging\src\main\java">
 <!--            不加上数据库的路径，按照targetPackage路径来-->
             <property name="enableSubPackages" value="false" />
             <property name="trimStrings" value="true" />
         </javaModelGenerator>
         <!--        指定sql映射文件生成的位置-->
-        <sqlMapGenerator targetPackage="mapper"  targetProject="E:\IDEA\workspace\sdadmin\sdadmin-system\src\main\resources\mybatis">
+        <sqlMapGenerator targetPackage="mapper"  targetProject="E:\IDEA\workspace\sdadmin\sdadmin-logging\src\main\resources\mybatis">
             <property name="enableSubPackages" value="false" />
             <property name="trimStrings" value="true" />
         </sqlMapGenerator>
         <!--        指定dao生成的位置，mapper接口生成的位置-->
-        <javaClientGenerator type="XMLMAPPER" targetPackage="com.sd.modules.system.mapper"  targetProject="E:\IDEA\workspace\sdadmin\sdadmin-system\src\main\java">
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.sd.mapper"  targetProject="E:\IDEA\workspace\sdadmin\sdadmin-logging\src\main\java">
             <property name="enableSubPackages" value="false" />
         </javaClientGenerator>
         <!--          指定每个表的生成策略 catalog 为指定数据库-->
-        <table tableName="user" domainObjectName="User"/>
+        <table tableName="log" domainObjectName="Log"/>
 
 
     </context>

@@ -5,10 +5,15 @@ import com.sd.modules.system.domain.User;
 import com.sd.modules.system.mapper.DeptMapper;
 import com.sd.modules.system.mapper.JobMapper;
 import com.sd.modules.system.service.RoleService;
+import com.sd.modules.system.service.dto.RoleSmallDto;
+import com.sd.modules.system.service.dto.UserDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.management.relation.RoleStatus;
 import java.sql.Timestamp;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * @author siyang
@@ -17,29 +22,35 @@ import java.sql.Timestamp;
 @Service
 public class JwtUserService {
     @Autowired
-    DeptMapper deptMapper;
+    private DeptMapper deptMapper;
     @Autowired
-    JobMapper jobMapper;
+    private JobMapper jobMapper;
     @Autowired
-    RoleService roleService;
+    private RoleService roleService;
 
     /**
      * 创建jwtUser
      * @param user
      * @return
      */
-    public JwtUser createJwtUser(User user){
-        ;
+    public JwtUser createJwtUser(UserDto user){
+        //取出角色id集合
+        Set<Long> roleIds = new HashSet<>();
+        Set<RoleSmallDto> roleSmallDtos = user.getRoles();
+        roleSmallDtos.forEach(roleSmallDto->{
+            roleIds.add(roleSmallDto.getId());
+        });
+
         return new JwtUser(user.getId(),
                 user.getUsername(),
                 user.getNickName(),
                 user.getSex(),
-                user.getAvatarId(),
+                user.getAvatar(),
                 user.getEmail(),
                 user.getPhone(),
-                deptMapper.selectByPrimaryKey(user.getDeptId()).getName(),
-                jobMapper.selectByPrimaryKey(user.getJobId()).getName(),
-                roleService.getPermissionAndRolesByUser(user),
+                user.getDept().getName(),
+                user.getJob().getName(),
+                roleService.getPermissionAndRolesByRoleIds(roleIds),
                 user.getEnabled()==0 ? false :true,
                 user.getCreateTime().getTime()
                 );

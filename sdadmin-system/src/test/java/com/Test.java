@@ -1,6 +1,10 @@
 package com;
 
-import com.sd.modules.security.security.JwtTokenProvider;
+
+import com.sd.modules.system.domain.Job;
+import com.sd.modules.system.service.dto.JobDto;
+
+import java.util.Date;
 
 /**
  * @author siyang
@@ -8,8 +12,6 @@ import com.sd.modules.security.security.JwtTokenProvider;
  */
 public class Test {
     public static void main(String[] args) {
-        JwtTokenProvider jwtTokenProvider = new JwtTokenProvider();
-        String siyang = jwtTokenProvider.createToken("siyang");
-        System.out.println(siyang);
+        Job job =new Job((long)1,"业务处理",true,(long)1,(long)1,new Date());
     }
 }

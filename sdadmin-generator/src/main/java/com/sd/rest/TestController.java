@@ -20,9 +20,9 @@ import java.util.List;
 @RestController
 public class TestController {
     @Autowired
-    GeneratorService generatorService;
+    private GeneratorService generatorService;
     @Autowired
-    GenConfigService genConfigService;
+    private GenConfigService genConfigService;
 
 
     @GetMapping("/doit")

@@ -4,6 +4,7 @@ import com.sd.exception.BadRequestException;
 import com.sd.modules.security.security.JwtTokenProvider;
 import com.sd.modules.system.domain.User;
 import com.sd.modules.system.service.UserService;
+import com.sd.modules.system.service.dto.UserDto;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
@@ -20,9 +21,9 @@ import org.springframework.beans.factory.annotation.Autowired;
  */
 public class JwtShiroRealm extends AuthorizingRealm {
     @Autowired
-    UserService userService;
+    private UserService userService;
     @Autowired
-    JwtTokenProvider jwtTokenProvider;
+    private JwtTokenProvider jwtTokenProvider;
 
 
     /**
@@ -57,7 +58,7 @@ public class JwtShiroRealm extends AuthorizingRealm {
         String username = jwtTokenProvider.parseToken(token.getToken());
 
         try {
-            User user = userService.getUserByUsername(username);
+            userService.getUserByUsername(username);
         } catch (BadRequestException e) {
             throw e;
         }

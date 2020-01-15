@@ -52,9 +52,9 @@ import java.util.Set;
 @Configuration
 public class ShiroConfiguration {
 //    @Autowired
-//    RequestMappingHandlerMapping resourceHandlerMapping;
+//    private RequestMappingHandlerMapping resourceHandlerMapping;
 //    @Autowired
-//    SpringContextHolder springContextHolder;
+//    private SpringContextHolder springContextHolder;
 
     /**
      * 设置过滤器
@@ -107,6 +107,7 @@ public class ShiroConfiguration {
         chainDefinition.addPathDefinition("/druid/**", "anon");
         chainDefinition.addPathDefinition("/avatar/**", "anon");
         //控制器路径
+        chainDefinition.addPathDefinition("/", "anon");
         chainDefinition.addPathDefinition("/auth/login", "anon");
         chainDefinition.addPathDefinition("/auth/code", "anon");
         chainDefinition.addPathDefinition("/auth/logout", "authcToken[permissive]");
